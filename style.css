@@ -10,17 +10,20 @@ nav{
 }
 .title{
     width: 100%;
-    border:0;
-    outline: 0;
-    font-size: 25px;
-}
-.title2{
-    width: 100%;
     border:1px solid gray;
     border-radius: 8px;
     padding: 10px;
     outline: 0;
     font-size: 25px;
+}
+.title2{
+    width: 100%;
+    font-size: 25px;
+    padding: 6px;
+}
+.border-remove{
+    border:0;
+    outline: 0; 
 }
 .edit{
     width: 100%;
@@ -29,4 +32,10 @@ nav{
     padding: 10px;
     outline: 0;
     font-size: 20px;
+}
+.options{
+    display: none;
+}
+.card-body:hover .options{
+    display: block;
 }

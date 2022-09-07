@@ -44,11 +44,12 @@ function getAllList(){
         allList += `
         <div class="card mb-2">
            <div class="card-body">
-                <form id="">
-                    <input type="text" value="${element}" class='d-block title mb-1'  readonly id='title'/>
-                    <small class='d-block text-danger' id="error${index}"></small>
-                    <input type="button" value="edit" class="btn btn-sm btn-info py-0" />
-                    <input type="button" value="delete" class="btn btn-sm btn-danger py-0" onclick="return deleteList(${index})" />
+                <form >
+                    <input type="text" value="${element}" class='d-block border-remove title2 mb-1' readonly id='title${index}'/>
+                    <div id='options${index}' class='options'>
+                        <input type="button" value="edit" id="edit${index}" class="btn btn-sm btn-info py-0" onclick="return editList(${index})" />
+                        <input type="button" value="delete" class="btn btn-sm btn-danger py-0" onclick="return deleteList(${index})" />
+                    </div>
                 </form>
            </div>
         </div>
@@ -63,14 +64,33 @@ function deleteList(id){
 
     allTodoList.splice(id,1);
 
-  let strList = JSON.stringify(allTodoList);
-    localStorage.setItem('allTodoList', strList); 
+    let strList = JSON.stringify(allTodoList);
+        localStorage.setItem('allTodoList', strList); 
     getAllList();
 
 }
 
 function editList(id){
+    let saveStatus = document.querySelector(`#edit${id}`);
+    if(saveStatus.value=='SAVE'){
+        return saveList(id);
+    }
+        saveStatus.value = 'SAVE';
+    let title = document.querySelector(`#title${id}`);
+        title.removeAttribute('readonly');
+        title.classList.toggle('border-remove');
+    let options = document.querySelector(`#options${id}`);
+        options.classList.toggle('d-block');
+    
+}
 
+function saveList(id){
+    let allTodoList = JSON.parse(localStorage.getItem('allTodoList'));
+    let title = document.querySelector(`#title${id}`).value;
+        allTodoList[id]=title; 
+    let strList = JSON.stringify(allTodoList);
+    localStorage.setItem('allTodoList', strList);
+    getAllList(); 
 }
 
 function totalList(){ 
