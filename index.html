@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="bg-primary mb-20">
+    <div class="container">
+        <h4 class="text-white">Todo List App <small id="totalList"></small></h2>
+    </div>
+</nav>
+
+<section>
+    <div class="container mb-4">
+        <div class="card">
+           <div class="card-body text-center">
+                <form id="addNewTodo">
+                    <small>Add to list</small>
+                    <input type="text" placeholder="Add new todo list here" class='d-block title2 mb-2 ' id='title'/>
+                    <small class="text-danger d-block" id="error"></small>
+                    <input type="button" value="Add to list" id="add" class="btn btn-sm btn-success py-1"  />
+                </form>
+           </div>
+        </div>
+    </div>
+
+    <div class="container" id="listAll">
+        <!-- <div class="card mb-2">
+           <div class="card-body">
+                <form id="">
+                    <input type="text" value="he is a good boy he is a good boy okay " class='d-block title mb-1'  readonly id='title'/>
+                    <input type="button" value="edit" id="edit" class="btn btn-sm btn-info py-0"   />
+                    <input type="button" value="delete" id="delete" class="btn btn-sm btn-danger py-0"  />
+                </form>
+           </div>
+        </div> -->
+
+    </div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
