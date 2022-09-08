@@ -1,7 +1,7 @@
 'use strict';
 
-let addNewTodo = document.querySelector("#add");
 
+// function to check for valid input
 function checkInput(inputID, errorID){
     let title = document.querySelector('#'+inputID).value.trim();
     if(title.length>0){
@@ -11,10 +11,9 @@ function checkInput(inputID, errorID){
         displayMsg(errorID, "Field cannot be Empty"); 
         return false;
 }
-function clearInput(inputID){
-    return document.querySelector('#'+inputID).value = '';
-}
- function displayMsg(errorID, errorMsg){
+
+// function to display error message
+function displayMsg(errorID, errorMsg){
     let message = document.querySelector("#"+errorID);
         message.innerHTML = errorMsg;
             setTimeout(()=>{
@@ -23,6 +22,8 @@ function clearInput(inputID){
     return true;
 } 
 
+// Event to save the new list
+let addNewTodo = document.querySelector("#add");
 addNewTodo.addEventListener('click',()=>{
     if(checkInput('title', 'error')==true){
         let title = document.querySelector('#title').value.trim();
@@ -32,11 +33,12 @@ addNewTodo.addEventListener('click',()=>{
         let strList = JSON.stringify(allTodoList);
         localStorage.setItem('allTodoList', strList);
         displayMsg('error', "Successfully Added");
-        clearInput('title');
+        document.querySelector('#title').value = '';
         getAllList(); 
     }
 });
 
+// function to get all list
 function getAllList(){
     let allTodoList = JSON.parse(localStorage.getItem('allTodoList')) || []; 
     let allList = '';
@@ -47,6 +49,7 @@ function getAllList(){
                 <form >
                     <input type="text" value="${element}" class='d-block border-remove title2 mb-1' readonly id='title${index}'/>
                     <div id='options${index}' class='options'>
+                    <small id='error${index}' class='d-block text-danger'></small>
                         <input type="button" value="edit" id="edit${index}" class="btn btn-sm btn-info py-0" onclick="return editList(${index})" />
                         <input type="button" value="delete" class="btn btn-sm btn-danger py-0" onclick="return deleteList(${index})" />
                     </div>
@@ -59,6 +62,7 @@ function getAllList(){
     document.getElementById("listAll").innerHTML= allList;
 }
 
+// function to delete list items
 function deleteList(id){
     let allTodoList = JSON.parse(localStorage.getItem('allTodoList')) ; 
 
@@ -70,6 +74,7 @@ function deleteList(id){
 
 }
 
+// function to make list editable
 function editList(id){
     let saveStatus = document.querySelector(`#edit${id}`);
     if(saveStatus.value=='SAVE'){
@@ -84,16 +89,21 @@ function editList(id){
     
 }
 
+// function to save the edited list
 function saveList(id){
     let allTodoList = JSON.parse(localStorage.getItem('allTodoList'));
     let title = document.querySelector(`#title${id}`).value;
-        allTodoList[id]=title; 
-    let strList = JSON.stringify(allTodoList);
-    localStorage.setItem('allTodoList', strList);
-    getAllList(); 
+
+        if(checkInput(`title${id}`, `error${id}`)==true){
+            allTodoList[id]=title; 
+            let strList = JSON.stringify(allTodoList);
+            localStorage.setItem('allTodoList', strList);
+            getAllList();
+        }
 }
 
-function totalList(){ 
+// Return the total number of Todo
+function totalList(){
     let allTodoList = JSON.parse(localStorage.getItem('allTodoList')) || []; 
     return document.getElementById("totalList").innerHTML =  `<small>(${allTodoList.length})</small>`; 
 }
