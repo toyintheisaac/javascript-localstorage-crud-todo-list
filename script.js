@@ -12,15 +12,16 @@ function checkInput(inputID, errorID){
         return false;
 }
 
-// function to display error message
-function displayMsg(errorID, errorMsg){
-    let message = document.querySelector("#"+errorID);
+// function to display error/success message
+function displayMsg(elementID, errorMsg){
+    let message = document.querySelector("#"+elementID);
         message.innerHTML = errorMsg;
+        // clear message after 2 sec 
             setTimeout(()=>{
                 message.innerHTML = '';
-            },2000); 
+            },2000);
     return true;
-} 
+}
 
 // Event to save the new list
 let addNewTodo = document.querySelector("#add");
@@ -108,5 +109,5 @@ function totalList(){
     return document.getElementById("totalList").innerHTML =  `<small>(${allTodoList.length})</small>`; 
 }
 
+// Instantiate to get all added lists
 getAllList();
-totalList();
